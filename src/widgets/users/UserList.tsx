@@ -7,7 +7,7 @@ type Props = {
 
 export default function UserList({ users } : Props) {
     return (
-        <div className="users-list">
+        <div className="users-list p-2">
             {
                 users.map((user) => {
                     return <UserListItem key={user.id} user={user} />

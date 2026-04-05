@@ -13,12 +13,15 @@ function HomePage ({ name, count, setName }: Props) {
     
     return (
         <>
-            <SearchUsers/>
-            <div>{name}</div>
-            <UiButton onClick={() => setName("Peter")} 
-                      title={"Change Name"}/>
-            <div>{count}</div>
-            <DefaultLayout></DefaultLayout>
+            <DefaultLayout 
+                main={<SearchUsers/>}
+                sidebar={<div>
+                    <div>{name}</div>
+                    <UiButton onClick={() => setName("Peter")} 
+                            title={"Change Name"}/>
+                    <div>{count}</div>
+                </div>}
+            ></DefaultLayout>
         </>
     )
 }

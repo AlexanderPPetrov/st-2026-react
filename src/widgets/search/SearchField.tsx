@@ -17,7 +17,7 @@ export default function SearchField(
         setSearchValue("")
     }
     return (
-        <div className="search-field">
+        <div className="search-field flex gap-2 p-2 items-center">
             <UiInput 
                 placeholder={placeholder} 
                 value={searchValue}
