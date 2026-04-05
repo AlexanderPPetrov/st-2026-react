@@ -1,9 +1,17 @@
-import { useState } from "react"
 import { UiButton, UiInput } from "../../components/ui"
 
-export default function SearchField() {
+type Props = {
+    searchValue: string
+    placeholder?: string
+    setSearchValue: React.Dispatch<React.SetStateAction<string>>
+}
 
-    const [searchValue, setSearchValue] = useState<string>("")
+export default function SearchField(
+    { 
+        searchValue,
+        setSearchValue,
+        placeholder = "Search..."
+    } : Props) {
 
     function clearButton() {
         setSearchValue("")
@@ -11,7 +19,7 @@ export default function SearchField() {
     return (
         <div className="search-field">
             <UiInput 
-                placeholder="Find by name" 
+                placeholder={placeholder} 
                 value={searchValue}
                 onChange={(event) => setSearchValue(event.target.value)}
             />

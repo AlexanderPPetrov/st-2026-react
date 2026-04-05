@@ -1,10 +1,7 @@
-import { useState } from "react"
 import DefaultLayout from "../layouts/DefaultLayout"
 import type { Maybe } from "../types"
-import { useUsersQuery } from "../api/queries/useUsersQuery"
-import UiButton from "../components/ui/UiButton"
-import UiInput from "../components/ui/UiInput"
-import UserList from "../widgets/users/UserList"
+import { UiButton } from "../components/ui"
+import SearchUsers from "../features/SearchUsers"
 
 type Props = {
     name: Maybe<string>
@@ -14,35 +11,12 @@ type Props = {
 
 function HomePage ({ name, count, setName }: Props) {
     
-    const { data, isLoading, error } = useUsersQuery()
-
-
-    function getUsersList() {
-        if(isLoading || error) {
-            return null
-        }
-        
-        return <UserList users={getFilteredList()}/>
-    }
-
-    function getFilteredList() {
-        if(!data) {
-            return []
-        }
-        return data.filter(({name}) => {
-            return name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
-        })
-
-    }
-
     return (
         <>
-           
-            {getUsersList()}
+            <SearchUsers/>
             <div>{name}</div>
             <UiButton onClick={() => setName("Peter")} 
                       title={"Change Name"}/>
-
             <div>{count}</div>
             <DefaultLayout></DefaultLayout>
         </>
