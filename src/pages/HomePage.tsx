@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import DefaultLayout from "../layouts/DefaultLayout"
-import type { Maybe, Users } from "../types"
+import type { Maybe } from "../types"
+import { useUsersQuery } from "../api/queries/useUsersQuery"
 
 type Props = {
     name: Maybe<string>
@@ -10,26 +11,28 @@ type Props = {
 
 function HomePage ({ name, count, setName }: Props) {
     
-    const [users, setUsers] = useState<Users>([])
+    const { data, isLoading, error } = useUsersQuery()
+
     const [searchValue, setSearchValue] = useState<string>("")
 
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then((response) => response.json())
-        .then((json) => setUsers(json))
-    },[])
-
-
     function getUsersList() {
+        if(isLoading || error) {
+            return null
+        }
+        
         return getFilteredList().map(({id, name}) => {
             return <div key={id}>{ name }</div>
         })
     }
 
     function getFilteredList() {
-        return users.filter(({name}) => {
+        if(!data) {
+            return []
+        }
+        return data.filter(({name}) => {
             return name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
         })
+
     }
 
     function clearButton() {

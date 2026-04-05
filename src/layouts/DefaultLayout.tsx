@@ -1,5 +1,4 @@
 function DefaultLayout() {
-    console.log("DefaultLayout Rendered")
     
     return (
         null
