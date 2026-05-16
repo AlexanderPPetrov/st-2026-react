@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage"
 
 import { createBrowserRouter, RouterProvider } from "react-router"
 import UsersPage from "./pages/UsersPage"
+import UsersPageDetails from "./pages/UsersPageDetails"
 
 function App() {
 
@@ -17,7 +18,16 @@ function App() {
         },
         {
           path: 'users',
-          Component: UsersPage,
+          children: [
+            {
+              index: true, 
+              Component: UsersPage,
+            },
+            {
+              path: ":id",
+              Component: UsersPageDetails
+            }
+          ]
         }
       ]
     },

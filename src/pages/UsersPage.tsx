@@ -1,9 +1,12 @@
+import SearchUsers from "../features/SearchUsers"
 
 function UsersPage () {
     
     return (
         <>
-            Users page
+            Users: 
+            
+            <SearchUsers/>
         </>
     )
 }
