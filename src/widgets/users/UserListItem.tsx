@@ -1,5 +1,6 @@
 import type { User } from "../../api/services/user/types"
 import { Link } from "react-router"
+import UserFavoriteIcon from "./UserFavoriteIcon"
 
 type Props = {
     user: User
@@ -24,7 +25,10 @@ export default function UserListItem({ user }: Props) {
             <div>
                 {user.name} : {user.email}
             </div>
-            <Link to={`/users/${user.id}`}>View Profile</Link>
+            <div className="flex gap-3">
+                <UserFavoriteIcon user={user}/>
+                <Link to={`/users/${user.id}`}>View Profile</Link>
+            </div>
         </div>
     )
 }
