@@ -9,12 +9,19 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      Component: () => <DefaultLayout main={<HomePage/>}></DefaultLayout>,
+      Component: DefaultLayout,
+      children: [
+        {
+          index: true, 
+          Component: HomePage,
+        },
+        {
+          path: 'users',
+          Component: UsersPage,
+        }
+      ]
     },
-    {
-      path: '/users', 
-      Component: () => <DefaultLayout main={<UsersPage/>}></DefaultLayout>
-    }
+    
   ])
  
   return (
